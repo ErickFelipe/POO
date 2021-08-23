@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Calcular Juros</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1> Nome: Erick Felipe de Souza Silva</h1>
+        <h1> RA: 1290481822011</h1>
+        <hr>
+        <h2>Juros Simples</h2>
+        <hr>
+        <form action="juros-simples.html">
+            <p>Valor Presente</p>
+            <input type="number"  name="vp" required="" step="0.1" />
+        <p>Taxa de juros</p>
+        <input type="number"  name="j" required="" step="0.1"/>
+        <p> Número de períodos</p>
+        <input type="number"  name="n" required="" step="0.1"/>
+        <br><br><br>
+            <input type="submit" value="Calcular Valor Futuro Juro Simples"/>
+            <br><br>
+        </form>
+        <hr>
+        <h2>Juros Composto</h2>
+        <hr>
+            <form action="juros-composto.html">
+                <p>Valor Presente</p>
+        <input type="number"  name="vpc" required="" step="0.1" />
+        <p>Taxa de juros</p>
+        <input type="number"  name="jc" required="" step="0.1"/>
+        <p> Número de períodos</p>
+        <input type="number"  name="nc" required="" step="0.1"/>
+        <br><br><br>
+            <input type="submit" value="Calcular Valor Futuro Juros Composto"/>
+        </form>
+        <hr>
+    </body>
+</html>
