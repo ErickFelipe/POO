@@ -43,8 +43,8 @@
         <%}%>
         <hr>
         <form >
-            <input type="number" name="n1" required="" /> +
-            <input type="number" name="n2" required="" />
+            <input type="number" name="n1" required="" value"<%= n1 %>" /> +
+            <input type="number" name="n2" required="" value"<%= n2 %>" />
             <input type="submit" value="Calcular"/>
         </form>
     </body>
