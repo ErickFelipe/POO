@@ -1,0 +1,30 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<%
+    if(request.getParameter("session-login")!=null){
+        session.setAttribute("session-login-user", request.getParameter("session-login-user"));
+        session.setAttribute("session-senha", request.getParameter("session-senha"));
+        response.sendRedirect(request.getRequestURI());
+    }else if(request.getParameter("session-logout")!=null){
+        session.removeAttribute("session-login-user");
+        session.removeAttribute("session-senha");
+        response.sendRedirect(request.getRequestURI());
+    }
+    String sessionLoginUser = (String) session.getAttribute("session-login-user");
+    String sessionSenha = (String) session.getAttribute("session-senha");
+%>
+<h1>ErickFelipeApp</h1>
+<form method="post">
+    <a href="index.jsp">ÍNDICE</a> |
+    <a href="page1.jsp">PÁGINA 1</a> |
+    <a href="page2.jsp">PÁGINA 2</a> |
+    <%if(sessionLoginUser==null && sessionSenha==null){%>
+    <input type="text" name="session-login-user" required="" placeholder="Entre com seu nome"/>
+    <input type="text" name="session-senha" maxlength="6" required="" placeholder="Entre com sua senha"/>
+        <input type="submit" name="session-login" value="Entrar"/>
+    <%}else{%>
+        Bem vindo, <%= sessionLoginUser %>
+        <input type="submit" name="session-logout" value="Sair"/>
+    <%}%>
+</form>
+<hr/>

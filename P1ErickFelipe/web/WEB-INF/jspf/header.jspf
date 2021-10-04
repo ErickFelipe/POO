@@ -1,0 +1,72 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.Random"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@ page pageEncoding="UTF-8" %>
+<%
+    ServletContext context = request.getServletContext();
+    Boolean isLogged = session.getAttribute("session_name") != null;
+    Boolean isTryLogout = request.getParameter("logout") != null;
+    Boolean isTryLogin = request.getParameter("username") != null;
+    
+    String username =  String.valueOf(session.getAttribute("session_name"));
+    String usernameParameter = String.valueOf(request.getParameter("username"));
+    
+    List<String> usersOnline = context.getAttribute("users_online")== null ? new ArrayList() : (List) context.getAttribute("users_online");
+    List<Integer> numbers = session.getAttribute(username) == null ? new ArrayList(): (List) session.getAttribute(username);
+    
+    if(isTryLogout && !isLogged){
+    response.sendRedirect(request.getRequestURI());
+    } else if(isTryLogout){
+        usersOnline.remove(usersOnline.indexOf(username));
+        session.removeAttribute(username);
+        session.removeAttribute("session_name");
+        
+        response.sendRedirect(request.getRequestURI());
+    } else if(isTryLogin){
+        session.setAttribute("session_name", usernameParameter);
+        
+        usersOnline.add(usernameParameter);
+        context.setAttribute("users_online", usersOnline);
+        
+        if(numbers.isEmpty()){
+            Random generate = new Random();
+            for(Integer i=0;i<6;i++){
+                Integer number = 1+generate.nextInt(59);
+                if(numbers.indexOf(number)>=0){
+                i--;
+                continue;
+    }
+    numbers.add(number);
+    }
+    session.setAttribute(usernameParameter, numbers);
+    }
+    response.sendRedirect(request.getRequestURI());
+    }
+%>
+<%if(isLogged){%>
+<header>
+    <h1>Erick Felipe de Souza Silva</h1>
+    <h2>Seja bem vindo, <%=username%></h2>
+    
+    <a href="index.jsp">Pagina Inicial</a>
+    <a href="erickfelipe.jsp">Erick Felipe</a>
+    <a href="erick-dica-megasena.jsp">Sorteio MegaSena</a>
+    
+    <form>
+        <br>
+        <input type="submit" value="Sair" name="logout" />
+        <br><br><br>
+        <hr>
+    </form>
+</header>
+  <%}else{%>  
+  <header>
+       <h1>Erick Felipe de Souza Silva</h1>
+       <form>
+           <label for="username"> Digite seu nome</label>
+           <input type="text" name="username" placeholder="Digite seu nome de usuario" required="" />
+           <input type="submit" value="Fazer login" />
+       </form>
+  </header>
+    <%}%> 
